@@ -16,7 +16,7 @@ export const Route = createFileRoute("/projects/$projectId")({
   loader: ({ params }) => {
     const project = getProject(params.projectId);
     if (!project) throw notFound();
-    return { project };
+    return { project: project! };
   },
   head: ({ loaderData }) => ({
     meta: loaderData
