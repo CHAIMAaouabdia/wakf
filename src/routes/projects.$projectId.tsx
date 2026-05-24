@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ProjectCard } from "@/components/site/ProjectCard";
-import { getProject, projects, categories } from "@/data/projects";
+import { getProject, projects, categories, type Project } from "@/data/projects";
 import { formatCurrency, formatNumber, pct } from "@/lib/format";
 
 export const Route = createFileRoute("/projects/$projectId")({
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/projects/$projectId")({
 });
 
 function ProjectDetail() {
-  const { project } = Route.useLoaderData();
+  const { project } = Route.useLoaderData() as { project: Project };
   const cat = categories.find((c) => c.id === project.category)!;
   const p = pct(project.raised, project.goal);
   const similar = projects.filter((x) => x.id !== project.id && x.category === project.category).slice(0, 3);
