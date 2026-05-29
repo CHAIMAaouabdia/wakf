@@ -14,11 +14,21 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { Counter } from "@/components/site/Counter";
 import { projects } from "@/data/projects";
 import { formatCurrency } from "@/lib/format";
+import { RequireRole } from "@/components/site/RequireRole";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/dashboard")({
-  component: Dashboard,
+  component: DashboardPage,
   head: () => ({ meta: [{ title: "لوحة التحكم — منصة الوقف الرقمي" }] }),
 });
+
+function DashboardPage() {
+  return (
+    <RequireRole roles={["donor"]}>
+      <Dashboard />
+    </RequireRole>
+  );
+}
 
 const monthly = [
   { m: "يناير", v: 120 }, { m: "فبراير", v: 180 }, { m: "مارس", v: 90 },
