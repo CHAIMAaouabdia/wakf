@@ -158,7 +158,7 @@ function Admin() {
               تدفّق التبرعات اللحظية يظهر هنا — متصل بمسار مالي مفتوح ومسار تدقيق.
             </div>
           </TabsContent>
-          <TabsContent value="users" className="mt-6">
+          <TabsContent value="users" className="mt-6 space-y-6">
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 { n: "متبرعون", v: 47200 },
@@ -173,6 +173,7 @@ function Admin() {
                 </div>
               ))}
             </div>
+            <AccountsTable />
           </TabsContent>
           <TabsContent value="ops" className="mt-6">
             <div className="bg-card border rounded-3xl p-6 flex items-start gap-3">
