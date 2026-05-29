@@ -13,13 +13,22 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Counter } from "@/components/site/Counter";
+import { RequireRole } from "@/components/site/RequireRole";
 import { projects } from "@/data/projects";
 import { formatCurrency, formatNumber, pct } from "@/lib/format";
 
 export const Route = createFileRoute("/admin")({
-  component: Admin,
+  component: AdminPage,
   head: () => ({ meta: [{ title: "لوحة الإدارة — منصة الوقف الرقمي" }] }),
 });
+
+function AdminPage() {
+  return (
+    <RequireRole roles={["admin"]}>
+      <Admin />
+    </RequireRole>
+  );
+}
 
 const trend = [
   { d: "السبت", v: 4200 }, { d: "الأحد", v: 5100 }, { d: "الإثنين", v: 4800 },
