@@ -192,6 +192,61 @@ function Admin() {
   );
 }
 
+const roleBadge: Record<Role, string> = {
+  admin: "bg-navy text-navy-foreground",
+  donor: "bg-primary/15 text-primary",
+  organization: "bg-gold/20 text-gold-foreground",
+};
+
+function AccountsTable() {
+  const [users, setUsers] = useState<PublicUser[]>([]);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("waqf_users");
+      if (raw) {
+        const parsed = JSON.parse(raw) as (PublicUser & { password?: string })[];
+        setUsers(parsed.map(({ password: _p, ...u }) => u));
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  return (
+    <div className="bg-card border rounded-3xl overflow-hidden">
+      <div className="p-4 border-b flex items-center justify-between">
+        <h3 className="font-display font-bold">الحسابات المسجّلة</h3>
+        <Badge className="bg-primary/15 text-primary border-0">{users.length} حساب</Badge>
+      </div>
+      <table className="w-full text-sm">
+        <thead className="bg-muted/50 text-right">
+          <tr>
+            <th className="p-4 font-semibold">الاسم</th>
+            <th className="p-4 font-semibold">البريد</th>
+            <th className="p-4 font-semibold">النوع</th>
+            <th className="p-4 font-semibold">تاريخ الإنشاء</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((u) => (
+            <tr key={u.id} className="border-t hover:bg-muted/30">
+              <td className="p-4 font-medium">{u.name}</td>
+              <td className="p-4 text-muted-foreground">{u.email}</td>
+              <td className="p-4">
+                <Badge className={`${roleBadge[u.role]} border-0`}>{ROLE_LABELS[u.role]}</Badge>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                {new Date(u.createdAt).toLocaleDateString("ar")}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function AdminKPI({ icon: Icon, label, value, prefix, trend, warn }: any) {
   return (
     <motion.div
