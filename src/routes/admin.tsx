@@ -17,6 +17,7 @@ import { Counter } from "@/components/site/Counter";
 import { RequireRole } from "@/components/site/RequireRole";
 import { projects } from "@/data/projects";
 import { formatCurrency, formatNumber, pct } from "@/lib/format";
+import { ROLE_LABELS, type PublicUser, type Role } from "@/lib/auth";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
