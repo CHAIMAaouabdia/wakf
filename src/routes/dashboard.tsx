@@ -14,11 +14,21 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { Counter } from "@/components/site/Counter";
 import { projects } from "@/data/projects";
 import { formatCurrency } from "@/lib/format";
+import { RequireRole } from "@/components/site/RequireRole";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/dashboard")({
-  component: Dashboard,
+  component: DashboardPage,
   head: () => ({ meta: [{ title: "لوحة التحكم — منصة الوقف الرقمي" }] }),
 });
+
+function DashboardPage() {
+  return (
+    <RequireRole roles={["donor"]}>
+      <Dashboard />
+    </RequireRole>
+  );
+}
 
 const monthly = [
   { m: "يناير", v: 120 }, { m: "فبراير", v: 180 }, { m: "مارس", v: 90 },
@@ -40,13 +50,14 @@ const history = [
 ];
 
 function Dashboard() {
+  const { user } = useAuth();
   return (
     <SiteLayout>
       <section className="py-12 bg-soft-gradient border-b">
         <div className="container mx-auto px-4 flex flex-wrap items-center justify-between gap-4">
           <div>
             <Badge className="bg-accent text-accent-foreground border-0 mb-2">مرحباً بعودتك</Badge>
-            <h1 className="font-display text-4xl font-extrabold">أهلاً، عبدالله 👋</h1>
+            <h1 className="font-display text-4xl font-extrabold">أهلاً، {user?.name ?? "عبدالله"} 👋</h1>
             <p className="text-muted-foreground mt-1">شكراً لعطائك المستمر. هذا أثرك حتى الآن.</p>
           </div>
           <Link to="/projects">

@@ -9,7 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as OrganizationRouteImport } from './routes/organization'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -18,9 +21,24 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projectId'
 import { Route as DonateProjectIdRouteImport } from './routes/donate.$projectId'
 
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizationRoute = OrganizationRouteImport.update({
+  id: '/organization',
+  path: '/organization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -65,7 +83,10 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
+  '/organization': typeof OrganizationRoute
   '/projects': typeof ProjectsRouteWithChildren
+  '/register': typeof RegisterRoute
   '/donate/$projectId': typeof DonateProjectIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
 }
@@ -75,7 +96,10 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
+  '/organization': typeof OrganizationRoute
   '/projects': typeof ProjectsRouteWithChildren
+  '/register': typeof RegisterRoute
   '/donate/$projectId': typeof DonateProjectIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
 }
@@ -86,7 +110,10 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
+  '/organization': typeof OrganizationRoute
   '/projects': typeof ProjectsRouteWithChildren
+  '/register': typeof RegisterRoute
   '/donate/$projectId': typeof DonateProjectIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
 }
@@ -98,7 +125,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contact'
     | '/dashboard'
+    | '/login'
+    | '/organization'
     | '/projects'
+    | '/register'
     | '/donate/$projectId'
     | '/projects/$projectId'
   fileRoutesByTo: FileRoutesByTo
@@ -108,7 +138,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contact'
     | '/dashboard'
+    | '/login'
+    | '/organization'
     | '/projects'
+    | '/register'
     | '/donate/$projectId'
     | '/projects/$projectId'
   id:
@@ -118,7 +151,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/contact'
     | '/dashboard'
+    | '/login'
+    | '/organization'
     | '/projects'
+    | '/register'
     | '/donate/$projectId'
     | '/projects/$projectId'
   fileRoutesById: FileRoutesById
@@ -129,17 +165,41 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
+  LoginRoute: typeof LoginRoute
+  OrganizationRoute: typeof OrganizationRoute
   ProjectsRoute: typeof ProjectsRouteWithChildren
+  RegisterRoute: typeof RegisterRoute
   DonateProjectIdRoute: typeof DonateProjectIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects': {
       id: '/projects'
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organization': {
+      id: '/organization'
+      path: '/organization'
+      fullPath: '/organization'
+      preLoaderRoute: typeof OrganizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -212,7 +272,10 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
+  LoginRoute: LoginRoute,
+  OrganizationRoute: OrganizationRoute,
   ProjectsRoute: ProjectsRouteWithChildren,
+  RegisterRoute: RegisterRoute,
   DonateProjectIdRoute: DonateProjectIdRoute,
 }
 export const routeTree = rootRouteImport
