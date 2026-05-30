@@ -59,6 +59,7 @@ const img = (id: number, q: string) =>
 export const projects: Project[] = [
   {
     id: "wells-chad",
+    organization: "جمعية البر الخيرية",
     title: "حفر 50 بئراً في تشاد",
     category: "water",
     shortDescription: "توفير مياه نظيفة لأكثر من 25,000 نسمة في القرى الأفريقية النائية.",
@@ -97,6 +98,7 @@ export const projects: Project[] = [
   },
   {
     id: "school-yemen",
+    organization: "مؤسسة نماء للتنمية",
     title: "مدرسة وقفية في صنعاء",
     category: "education",
     shortDescription: "بناء وتشغيل مدرسة متكاملة لـ 800 طالب وطالبة من الأيتام والمحتاجين.",
@@ -134,6 +136,7 @@ export const projects: Project[] = [
   },
   {
     id: "mosque-bosnia",
+    organization: "جمعية إحياء التراث",
     title: "إعمار مسجد في البوسنة",
     category: "mosques",
     shortDescription: "ترميم وإعمار مسجد تاريخي يخدم 1,500 مصلٍّ مع مكتبة قرآنية.",
@@ -166,6 +169,7 @@ export const projects: Project[] = [
   },
   {
     id: "solar-gaza",
+    organization: "جمعية الإغاثة الطبية",
     title: "محطة طاقة شمسية لمستشفى",
     category: "solar",
     shortDescription: "تزويد مستشفى ميداني بالطاقة المتجددة لإنقاذ آلاف الأرواح.",
@@ -201,6 +205,7 @@ export const projects: Project[] = [
   },
   {
     id: "orphans-syria",
+    organization: "جمعية كافل لرعاية الأيتام",
     title: "كفالة 200 يتيم في الشام",
     category: "orphans",
     shortDescription: "كفالة شهرية شاملة (تعليم، صحة، سكن) لـ 200 يتيم سوري لمدة 5 سنوات.",
@@ -231,6 +236,7 @@ export const projects: Project[] = [
   },
   {
     id: "clinic-somalia",
+    organization: "جمعية الشفاء الإنسانية",
     title: "عيادة وقفية في الصومال",
     category: "health",
     shortDescription: "بناء عيادة متكاملة تخدم 50,000 نسمة بخدمات صحية مجانية.",
