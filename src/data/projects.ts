@@ -1,6 +1,7 @@
 export type Category =
   | "education"
   | "health"
+  | "medical"
   | "mosques"
   | "water"
   | "orphans"
@@ -10,11 +11,23 @@ export type Category =
 export const categories: { id: Category; label: string; icon: string }[] = [
   { id: "education", label: "التعليم", icon: "📚" },
   { id: "health", label: "الصحة", icon: "🏥" },
+  { id: "medical", label: "عمليات جراحية", icon: "🩺" },
   { id: "mosques", label: "المساجد", icon: "🕌" },
   { id: "water", label: "حفر الآبار", icon: "💧" },
   { id: "orphans", label: "الأيتام", icon: "🤲" },
   { id: "environment", label: "البيئة", icon: "🌱" },
   { id: "solar", label: "الطاقة الشمسية", icon: "☀️" },
+];
+
+// المنصة تغطي الجزائر وولاياتها فقط
+export const WILAYAS: string[] = [
+  "أدرار", "الشلف", "الأغواط", "أم البواقي", "باتنة", "بجاية", "بسكرة", "بشار",
+  "البليدة", "البويرة", "تمنراست", "تبسة", "تلمسان", "تيارت", "تيزي وزو",
+  "الجزائر", "الجلفة", "جيجل", "سطيف", "سعيدة", "سكيكدة", "سيدي بلعباس", "عنابة",
+  "قالمة", "قسنطينة", "المدية", "مستغانم", "المسيلة", "معسكر", "ورقلة", "وهران",
+  "البيض", "إليزي", "برج بوعريريج", "بومرداس", "الطارف", "تندوف", "تيسمسيلت",
+  "الوادي", "خنشلة", "سوق أهراس", "تيبازة", "ميلة", "عين الدفلى", "النعامة",
+  "عين تموشنت", "غرداية", "غليزان",
 ];
 
 export interface Project {
