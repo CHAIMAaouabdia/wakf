@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { getProject, type Project } from "@/data/projects";
+import { getProject, WILAYAS, type Project } from "@/data/projects";
 import { formatCurrency } from "@/lib/format";
 
 export const Route = createFileRoute("/donate/$projectId")({
