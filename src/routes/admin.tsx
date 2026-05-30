@@ -15,9 +15,13 @@ import { Progress } from "@/components/ui/progress";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Counter } from "@/components/site/Counter";
 import { RequireRole } from "@/components/site/RequireRole";
-import { projects } from "@/data/projects";
+import { projects, categories } from "@/data/projects";
 import { formatCurrency, formatNumber, pct } from "@/lib/format";
 import { ROLE_LABELS, type PublicUser, type Role } from "@/lib/auth";
+import {
+  getSubmissions, setSubmissionStatus, subscribeSubmissions, type Submission,
+} from "@/lib/submissions";
+import { CheckCircle2, XCircle } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
