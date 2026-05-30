@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Building2, Plus, Wallet, Users, FolderKanban, TrendingUp, Send, CheckCircle2,
@@ -21,9 +21,12 @@ import {
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { RequireRole } from "@/components/site/RequireRole";
 import { Counter } from "@/components/site/Counter";
-import { projects, categories } from "@/data/projects";
+import { projects, categories, WILAYAS } from "@/data/projects";
 import { formatCurrency, formatNumber, pct } from "@/lib/format";
 import { useAuth } from "@/lib/auth";
+import {
+  addSubmission, getSubmissionsByOrg, subscribeSubmissions, type Submission,
+} from "@/lib/submissions";
 
 export const Route = createFileRoute("/organization")({
   component: OrganizationPage,
