@@ -34,6 +34,8 @@ export interface Project {
   id: string;
   title: string;
   category: Category;
+  /** اسم الجمعية التي نشرت المشروع */
+  organization: string;
   shortDescription: string;
   story: string;
   image: string;
