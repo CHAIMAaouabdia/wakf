@@ -88,14 +88,14 @@ function DonatePage() {
                           amount === v ? "border-primary bg-accent text-primary shadow-soft" : "border-border hover:border-primary/40"
                         }`}
                       >
-                        $ {v}
+                        {v.toLocaleString("ar-EG")} دج
                       </button>
                     ))}
                   </div>
                   <div>
                     <label className="text-sm text-muted-foreground mb-2 block">أو أدخل مبلغاً مخصصاً</label>
                     <div className="relative">
-                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">دج</span>
                       <Input
                         type="number"
                         value={amount}
