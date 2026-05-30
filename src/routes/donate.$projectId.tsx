@@ -173,12 +173,35 @@ function DonatePage() {
                   </div>
 
                   <div className="space-y-3 pt-4 border-t">
-                    <h3 className="font-bold">بيانات البطاقة (واجهة فقط)</h3>
-                    <Input placeholder="رقم البطاقة" className="h-12" disabled />
+                    <h3 className="font-bold">بيانات البطاقة</h3>
+                    <Input
+                      placeholder="رقم البطaقة"
+                      inputMode="numeric"
+                      maxLength={19}
+                      value={card.number}
+                      onChange={(e) => setCard({ ...card, number: e.target.value })}
+                      className="h-12"
+                    />
                     <div className="grid grid-cols-2 gap-3">
-                      <Input placeholder="MM / YY" className="h-12" disabled />
-                      <Input placeholder="CVV" className="h-12" disabled />
+                      <Input
+                        placeholder="MM / YY"
+                        maxLength={7}
+                        value={card.exp}
+                        onChange={(e) => setCard({ ...card, exp: e.target.value })}
+                        className="h-12"
+                      />
+                      <Input
+                        placeholder="CVV"
+                        inputMode="numeric"
+                        maxLength={4}
+                        value={card.cvv}
+                        onChange={(e) => setCard({ ...card, cvv: e.target.value })}
+                        className="h-12"
+                      />
                     </div>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <ShieldCheck className="size-3.5 text-primary" /> واجهة دفع تجريبية — لا تُجرى أي عملية بنكية حقيقية.
+                    </p>
                   </div>
                 </motion.div>
               )}
