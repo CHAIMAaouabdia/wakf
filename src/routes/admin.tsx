@@ -109,12 +109,17 @@ function Admin() {
         </div>
 
         <Tabs defaultValue="projects">
-          <TabsList className="bg-card border h-12 p-1">
+          <TabsList className="bg-card border h-12 p-1 flex-wrap h-auto">
             <TabsTrigger value="projects">إدارة المشاريع</TabsTrigger>
+            <TabsTrigger value="approvals">طلبات النشر</TabsTrigger>
             <TabsTrigger value="donations">التبرعات</TabsTrigger>
             <TabsTrigger value="users">المستخدمون</TabsTrigger>
             <TabsTrigger value="ops">العمليات</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="approvals" className="mt-6">
+            <ApprovalsTable />
+          </TabsContent>
 
           <TabsContent value="projects" className="mt-6">
             <div className="bg-card border rounded-3xl overflow-hidden">
