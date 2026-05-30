@@ -207,6 +207,82 @@ const roleBadge: Record<Role, string> = {
   organization: "bg-gold/20 text-gold-foreground",
 };
 
+function ApprovalsTable() {
+  const [subs, setSubs] = useState<Submission[]>([]);
+
+  useEffect(() => {
+    const load = () => setSubs(getSubmissions());
+    load();
+    return subscribeSubmissions(load);
+  }, []);
+
+  const pending = subs.filter((s) => s.status === "pending");
+
+  const act = (id: string, status: "approved" | "rejected") => {
+    setSubmissionStatus(id, status);
+    toast.success(status === "approved" ? "تمت الموافقة على النشر ✅" : "تم رفض الطلب");
+  };
+
+  return (
+    <div className="bg-card border rounded-3xl overflow-hidden">
+      <div className="p-4 border-b flex items-center justify-between">
+        <h3 className="font-display font-bold">طلبات النشر من الجمعيات</h3>
+        <Badge className="bg-gold/20 text-gold-foreground border-0">{pending.length} قيد المراجعة</Badge>
+      </div>
+      {subs.length === 0 ? (
+        <div className="p-12 text-center text-muted-foreground">
+          لا توجد طلبات نشر حالياً. ستظهر هنا المشاريع التي ترسلها الجمعيات.
+        </div>
+      ) : (
+        <table className="w-full text-sm">
+          <thead className="bg-muted/50 text-right">
+            <tr>
+              <th className="p-4 font-semibold">المشروع</th>
+              <th className="p-4 font-semibold">الجمعية</th>
+              <th className="p-4 font-semibold">التصنيف</th>
+              <th className="p-4 font-semibold">الولاية</th>
+              <th className="p-4 font-semibold">المبلغ</th>
+              <th className="p-4 font-semibold">الإجراء</th>
+            </tr>
+          </thead>
+          <tbody>
+            {subs.map((s) => (
+              <tr key={s.id} className="border-t hover:bg-muted/30">
+                <td className="p-4 font-medium">{s.title}</td>
+                <td className="p-4 text-muted-foreground">{s.organization}</td>
+                <td className="p-4 text-muted-foreground">
+                  {categories.find((c) => c.id === s.category)?.label ?? s.category}
+                </td>
+                <td className="p-4 text-muted-foreground">{s.wilaya}</td>
+                <td className="p-4 text-primary font-bold">{formatCurrency(s.goal)}</td>
+                <td className="p-4">
+                  {s.status === "pending" ? (
+                    <div className="flex gap-2">
+                      <Button size="sm" onClick={() => act(s.id, "approved")}
+                        className="bg-primary-gradient text-primary-foreground gap-1 h-8">
+                        <CheckCircle2 className="size-4" /> موافقة
+                      </Button>
+                      <Button size="sm" variant="outline" onClick={() => act(s.id, "rejected")}
+                        className="gap-1 h-8 text-destructive">
+                        <XCircle className="size-4" /> رفض
+                      </Button>
+                    </div>
+                  ) : s.status === "approved" ? (
+                    <Badge className="bg-primary/15 text-primary border-0">منشور</Badge>
+                  ) : (
+                    <Badge className="bg-destructive/15 text-destructive border-0">مرفوض</Badge>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+
 function AccountsTable() {
   const [users, setUsers] = useState<PublicUser[]>([]);
 
