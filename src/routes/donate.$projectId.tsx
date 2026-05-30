@@ -264,7 +264,7 @@ function DonatePage() {
                   </motion.div>
                   <h2 className="font-display text-3xl font-extrabold">جزاك الله خيراً!</h2>
                   <p className="text-muted-foreground mt-3 max-w-md mx-auto">
-                    تم استلام تبرعك بقيمة <span className="font-bold text-primary">{formatCurrency(amount)}</span> لمشروع {project.title}.
+                    تم استلام تبرعك بقيمة <span className="font-bold text-primary">{formatCurrency(total)}</span> لمشروع {project.title}.
                     سنرسل إيصالك على بريدك، ونحدثك دورياً بأثر تبرعك.
                   </p>
                   <Badge className="bg-gold-gradient text-gold-foreground border-0 mt-5">
