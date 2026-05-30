@@ -111,6 +111,40 @@ function DonatePage() {
                       <div className="text-muted-foreground">100% من تبرعك يصل للمستفيدين. لا نأخذ أي رسوم.</div>
                     </div>
                   </div>
+
+                  <div className="p-4 rounded-2xl border-2 border-dashed border-primary/30 space-y-3">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={supportPlatform}
+                        onChange={(e) => setSupportPlatform(e.target.checked)}
+                        className="size-4 mt-1"
+                      />
+                      <div className="text-sm">
+                        <div className="font-bold flex items-center gap-1">
+                          <Heart className="size-4 text-primary" /> ادعم تطوير المنصة
+                        </div>
+                        <div className="text-muted-foreground">
+                          أضف تبرعاً اختيارياً لتحسين وتشغيل منصة الوقف الرقمي.
+                        </div>
+                      </div>
+                    </label>
+                    {supportPlatform && (
+                      <div className="flex gap-2 pr-7">
+                        {[100, 200, 500].map((t) => (
+                          <button
+                            key={t}
+                            onClick={() => setPlatformTip(t)}
+                            className={`px-4 py-2 rounded-xl border-2 text-sm font-bold transition-all ${
+                              platformTip === t ? "border-primary bg-accent text-primary" : "border-border hover:border-primary/40"
+                            }`}
+                          >
+                            {t} دج
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </motion.div>
               )}
 
