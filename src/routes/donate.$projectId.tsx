@@ -19,12 +19,12 @@ export const Route = createFileRoute("/donate/$projectId")({
   head: () => ({ meta: [{ title: "تبرع — منصة الوقف الرقمي" }] }),
 });
 
-const PRESETS = [25, 50, 100, 250, 500, 1000];
+const PRESETS = [500, 1000, 2000, 5000, 10000, 20000];
 const METHODS = [
-  { id: "cib", name: "CIB", desc: "بطاقة CIB البنكية", emoji: "🏦" },
-  { id: "gold", name: "الذهبية", desc: "البطاقة الذهبية", emoji: "💳" },
-  { id: "visa", name: "Visa", desc: "فيزا دولية", emoji: "💠" },
-  { id: "mc", name: "Mastercard", desc: "ماستركارد", emoji: "🔶" },
+  { id: "cib", name: "CIB", desc: "بطاقة الدفع الذهبية CIB", emoji: "🏦" },
+  { id: "edahabia", name: "الذهبية", desc: "بطاقة بريد الجزائر الذهبية", emoji: "💳" },
+  { id: "baridimob", name: "BaridiMob", desc: "الدفع عبر تطبيق بريدي موب", emoji: "📱" },
+  { id: "visa", name: "Visa / Mastercard", desc: "بطاقة دولية", emoji: "💠" },
 ];
 
 function DonatePage() {
