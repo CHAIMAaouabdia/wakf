@@ -175,7 +175,7 @@ function DonatePage() {
                   <div className="space-y-3 pt-4 border-t">
                     <h3 className="font-bold">بيانات البطاقة</h3>
                     <Input
-                      placeholder="رقم البطaقة"
+                      placeholder="رقم البطاقة"
                       inputMode="numeric"
                       maxLength={19}
                       value={card.number}
