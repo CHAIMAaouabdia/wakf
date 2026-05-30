@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Building2, Plus, Wallet, Users, FolderKanban, TrendingUp, Send, CheckCircle2,
@@ -21,9 +21,12 @@ import {
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { RequireRole } from "@/components/site/RequireRole";
 import { Counter } from "@/components/site/Counter";
-import { projects, categories } from "@/data/projects";
+import { projects, categories, WILAYAS } from "@/data/projects";
 import { formatCurrency, formatNumber, pct } from "@/lib/format";
 import { useAuth } from "@/lib/auth";
+import {
+  addSubmission, getSubmissionsByOrg, subscribeSubmissions, type Submission,
+} from "@/lib/submissions";
 
 export const Route = createFileRoute("/organization")({
   component: OrganizationPage,
@@ -48,9 +51,16 @@ function OrganizationPage() {
 function OrganizationDashboard() {
   const { user } = useAuth();
   // mock: this org owns the first 3 projects
-  const [myProjects, setMyProjects] = useState(projects.slice(0, 3));
+  const [myProjects] = useState(projects.slice(0, 3));
   const [open, setOpen] = useState(false);
-  const [draft, setDraft] = useState({ title: "", category: "water", goal: "", description: "" });
+  const [draft, setDraft] = useState({ title: "", category: "water", goal: "", description: "", wilaya: WILAYAS[15] });
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
+
+  useEffect(() => {
+    const load = () => setSubmissions(getSubmissionsByOrg(user?.name ?? ""));
+    load();
+    return subscribeSubmissions(load);
+  }, [user?.name]);
 
   const totalRaised = myProjects.reduce((s, p) => s + p.raised, 0);
   const totalDonors = myProjects.reduce((s, p) => s + p.donors, 0);
@@ -60,19 +70,15 @@ function OrganizationDashboard() {
       toast.error("يرجى تعبئة العنوان والمبلغ المستهدف");
       return;
     }
-    const newProject = {
-      ...projects[0],
-      id: `org-proj-${Date.now()}`,
+    addSubmission({
       title: draft.title,
       category: draft.category as (typeof projects)[number]["category"],
-      shortDescription: draft.description || "مشروع وقفي جديد",
       goal: Number(draft.goal),
-      raised: 0,
-      donors: 0,
-      verified: false,
-    };
-    setMyProjects((p) => [newProject, ...p]);
-    setDraft({ title: "", category: "water", goal: "", description: "" });
+      shortDescription: draft.description || "مشروع وقفي جديد",
+      organization: user?.name ?? "جمعية",
+      wilaya: draft.wilaya,
+    });
+    setDraft({ title: "", category: "water", goal: "", description: "", wilaya: WILAYAS[15] });
     setOpen(false);
     toast.success("تم إرسال المشروع للمراجعة من قبل الإدارة ✅");
   };
@@ -99,7 +105,7 @@ function OrganizationDashboard() {
 
       <section className="container mx-auto px-4 py-10 space-y-8">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <OrgKPI icon={Wallet} label="إجمالي المُحصّل" value={totalRaised} prefix="$ " color="primary" />
+          <OrgKPI icon={Wallet} label="إجمالي المُحصّل" value={totalRaised} prefix="دج " color="primary" />
           <OrgKPI icon={FolderKanban} label="مشاريعي" value={myProjects.length} color="gold" />
           <OrgKPI icon={Users} label="إجمالي المتبرعين" value={totalDonors} color="navy" />
           <OrgKPI icon={TrendingUp} label="نمو هذا الشهر" value={31} suffix="%" color="primary" />
@@ -132,6 +138,7 @@ function OrganizationDashboard() {
         <Tabs defaultValue="projects">
           <TabsList className="bg-card border h-12 p-1">
             <TabsTrigger value="projects">مشاريعي</TabsTrigger>
+            <TabsTrigger value="submissions">طلبات النشر</TabsTrigger>
             <TabsTrigger value="updates">نشر تحديث</TabsTrigger>
             <TabsTrigger value="profile">ملف الجمعية</TabsTrigger>
           </TabsList>
@@ -179,7 +186,51 @@ function OrganizationDashboard() {
             </div>
           </TabsContent>
 
+          <TabsContent value="submissions" className="mt-6">
+            {submissions.length === 0 ? (
+              <div className="bg-card border rounded-3xl p-12 text-center text-muted-foreground">
+                لا توجد طلبات نشر بعد. أنشئ مشروعاً جديداً ليظهر هنا بانتظار موافقة الإدارة.
+              </div>
+            ) : (
+              <div className="bg-card border rounded-3xl overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead className="bg-muted/50 text-right">
+                    <tr>
+                      <th className="p-4 font-semibold">المشروع</th>
+                      <th className="p-4 font-semibold">التصنيف</th>
+                      <th className="p-4 font-semibold">الولاية</th>
+                      <th className="p-4 font-semibold">المبلغ المستهدف</th>
+                      <th className="p-4 font-semibold">الحالة</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {submissions.map((s) => (
+                      <tr key={s.id} className="border-t hover:bg-muted/30">
+                        <td className="p-4 font-medium">{s.title}</td>
+                        <td className="p-4 text-muted-foreground">
+                          {categories.find((c) => c.id === s.category)?.label ?? s.category}
+                        </td>
+                        <td className="p-4 text-muted-foreground">{s.wilaya}</td>
+                        <td className="p-4 text-primary font-bold">{formatCurrency(s.goal)}</td>
+                        <td className="p-4">
+                          {s.status === "approved" ? (
+                            <Badge className="bg-primary/15 text-primary border-0">منشور</Badge>
+                          ) : s.status === "rejected" ? (
+                            <Badge className="bg-destructive/15 text-destructive border-0">مرفوض</Badge>
+                          ) : (
+                            <Badge className="bg-gold/20 text-gold-foreground border-0">قيد المراجعة</Badge>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </TabsContent>
+
           <TabsContent value="updates" className="mt-6">
+
             <div className="bg-card border rounded-3xl p-6 max-w-2xl space-y-4">
               <h3 className="font-bold">نشر تحديث للمتبرعين</h3>
               <Input placeholder="عنوان التحديث" />
@@ -239,10 +290,20 @@ function CreateProjectDialog({ open, setOpen, draft, setDraft, onCreate }: any) 
               </select>
             </div>
             <div>
-              <Label htmlFor="g">المبلغ المستهدف ($)</Label>
+              <Label htmlFor="g">المبلغ المستهدف (دج)</Label>
               <Input id="g" type="number" value={draft.goal} className="mt-1"
                 onChange={(e) => setDraft({ ...draft, goal: e.target.value })} />
             </div>
+          </div>
+          <div>
+            <Label htmlFor="w">الولاية (الجزائر)</Label>
+            <select id="w" value={draft.wilaya}
+              onChange={(e) => setDraft({ ...draft, wilaya: e.target.value })}
+              className="mt-1 w-full h-10 rounded-md border bg-background px-3 text-sm">
+              {WILAYAS.map((w) => (
+                <option key={w} value={w}>{w}</option>
+              ))}
+            </select>
           </div>
           <div>
             <Label htmlFor="d">وصف مختصر</Label>

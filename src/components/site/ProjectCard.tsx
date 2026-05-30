@@ -50,6 +50,9 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
           <h3 className="font-display font-bold text-lg leading-tight group-hover:text-primary transition-colors">
             {project.title}
           </h3>
+          <p className="text-xs text-primary mt-1 flex items-center gap-1">
+            <ShieldCheck className="size-3" /> {project.organization}
+          </p>
           <p className="text-sm text-muted-foreground mt-1.5 line-clamp-2">{project.shortDescription}</p>
         </div>
 

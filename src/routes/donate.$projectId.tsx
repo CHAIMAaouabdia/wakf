@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { getProject, type Project } from "@/data/projects";
+import { getProject, WILAYAS, type Project } from "@/data/projects";
 import { formatCurrency } from "@/lib/format";
 
 export const Route = createFileRoute("/donate/$projectId")({
@@ -19,23 +19,30 @@ export const Route = createFileRoute("/donate/$projectId")({
   head: () => ({ meta: [{ title: "تبرع — منصة الوقف الرقمي" }] }),
 });
 
-const PRESETS = [25, 50, 100, 250, 500, 1000];
+const PRESETS = [500, 1000, 2000, 5000, 10000, 20000];
 const METHODS = [
-  { id: "cib", name: "CIB", desc: "بطاقة CIB البنكية", emoji: "🏦" },
-  { id: "gold", name: "الذهبية", desc: "البطاقة الذهبية", emoji: "💳" },
-  { id: "visa", name: "Visa", desc: "فيزا دولية", emoji: "💠" },
-  { id: "mc", name: "Mastercard", desc: "ماستركارد", emoji: "🔶" },
+  { id: "cib", name: "CIB", desc: "بطاقة الدفع الذهبية CIB", emoji: "🏦" },
+  { id: "edahabia", name: "الذهبية", desc: "بطاقة بريد الجزائر الذهبية", emoji: "💳" },
+  { id: "baridimob", name: "BaridiMob", desc: "الدفع عبر تطبيق بريدي موب", emoji: "📱" },
+  { id: "visa", name: "Visa / Mastercard", desc: "بطاقة دولية", emoji: "💠" },
 ];
 
 function DonatePage() {
   const { project } = Route.useLoaderData() as { project: Project };
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(1000);
   const [method, setMethod] = useState("cib");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [wilaya, setWilaya] = useState(WILAYAS[15]);
   const [anonymous, setAnonymous] = useState(false);
+  const [supportPlatform, setSupportPlatform] = useState(false);
+  const [platformTip, setPlatformTip] = useState(200);
+  const [card, setCard] = useState({ number: "", exp: "", cvv: "" });
+
+  const total = amount + (supportPlatform ? platformTip : 0);
 
   const steps = ["المبلغ", "وسيلة الدفع", "التأكيد", "تم"];
 
@@ -81,14 +88,14 @@ function DonatePage() {
                           amount === v ? "border-primary bg-accent text-primary shadow-soft" : "border-border hover:border-primary/40"
                         }`}
                       >
-                        $ {v}
+                        {v.toLocaleString("ar-EG")} دج
                       </button>
                     ))}
                   </div>
                   <div>
                     <label className="text-sm text-muted-foreground mb-2 block">أو أدخل مبلغاً مخصصاً</label>
                     <div className="relative">
-                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">دج</span>
                       <Input
                         type="number"
                         value={amount}
@@ -103,6 +110,40 @@ function DonatePage() {
                       <div className="font-bold">صدقة جارية</div>
                       <div className="text-muted-foreground">100% من تبرعك يصل للمستفيدين. لا نأخذ أي رسوم.</div>
                     </div>
+                  </div>
+
+                  <div className="p-4 rounded-2xl border-2 border-dashed border-primary/30 space-y-3">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={supportPlatform}
+                        onChange={(e) => setSupportPlatform(e.target.checked)}
+                        className="size-4 mt-1"
+                      />
+                      <div className="text-sm">
+                        <div className="font-bold flex items-center gap-1">
+                          <Heart className="size-4 text-primary" /> ادعم تطوير المنصة
+                        </div>
+                        <div className="text-muted-foreground">
+                          أضف تبرعاً اختيارياً لتحسين وتشغيل منصة الوقف الرقمي.
+                        </div>
+                      </div>
+                    </label>
+                    {supportPlatform && (
+                      <div className="flex gap-2 pr-7">
+                        {[100, 200, 500].map((t) => (
+                          <button
+                            key={t}
+                            onClick={() => setPlatformTip(t)}
+                            className={`px-4 py-2 rounded-xl border-2 text-sm font-bold transition-all ${
+                              platformTip === t ? "border-primary bg-accent text-primary" : "border-border hover:border-primary/40"
+                            }`}
+                          >
+                            {t} دج
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               )}
@@ -132,12 +173,35 @@ function DonatePage() {
                   </div>
 
                   <div className="space-y-3 pt-4 border-t">
-                    <h3 className="font-bold">بيانات البطاقة (واجهة فقط)</h3>
-                    <Input placeholder="رقم البطاقة" className="h-12" disabled />
+                    <h3 className="font-bold">بيانات البطاقة</h3>
+                    <Input
+                      placeholder="رقم البطاقة"
+                      inputMode="numeric"
+                      maxLength={19}
+                      value={card.number}
+                      onChange={(e) => setCard({ ...card, number: e.target.value })}
+                      className="h-12"
+                    />
                     <div className="grid grid-cols-2 gap-3">
-                      <Input placeholder="MM / YY" className="h-12" disabled />
-                      <Input placeholder="CVV" className="h-12" disabled />
+                      <Input
+                        placeholder="MM / YY"
+                        maxLength={7}
+                        value={card.exp}
+                        onChange={(e) => setCard({ ...card, exp: e.target.value })}
+                        className="h-12"
+                      />
+                      <Input
+                        placeholder="CVV"
+                        inputMode="numeric"
+                        maxLength={4}
+                        value={card.cvv}
+                        onChange={(e) => setCard({ ...card, cvv: e.target.value })}
+                        className="h-12"
+                      />
                     </div>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <ShieldCheck className="size-3.5 text-primary" /> واجهة دفع تجريبية — لا تُجرى أي عملية بنكية حقيقية.
+                    </p>
                   </div>
                 </motion.div>
               )}
@@ -148,6 +212,19 @@ function DonatePage() {
                   <div className="space-y-3">
                     <Input placeholder="الاسم الكريم" value={name} onChange={(e) => setName(e.target.value)} className="h-12" />
                     <Input type="email" placeholder="البريد الإلكتروني (لإرسال إيصال التبرع)" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12" />
+                    <Input type="tel" placeholder="رقم الهاتف (الجزائر)" value={phone} onChange={(e) => setPhone(e.target.value)} className="h-12" />
+                    <div>
+                      <label className="text-sm text-muted-foreground mb-1 block">الولاية (المنصة تغطي الجزائر وولاياتها فقط)</label>
+                      <select
+                        value={wilaya}
+                        onChange={(e) => setWilaya(e.target.value)}
+                        className="w-full h-12 rounded-md border bg-background px-3 text-sm"
+                      >
+                        {WILAYAS.map((w) => (
+                          <option key={w} value={w}>{w}</option>
+                        ))}
+                      </select>
+                    </div>
                     <label className="flex items-center gap-2 text-sm cursor-pointer">
                       <input type="checkbox" checked={anonymous} onChange={(e) => setAnonymous(e.target.checked)} className="size-4" />
                       التبرع باسم "متبرع كريم"
@@ -156,12 +233,15 @@ function DonatePage() {
 
                   <div className="bg-accent rounded-2xl p-5 space-y-2">
                     <Row k="المشروع" v={project.title} />
-                    <Row k="المبلغ" v={formatCurrency(amount)} />
+                    <Row k="الجمعية" v={project.organization} />
+                    <Row k="الولاية" v={wilaya} />
+                    <Row k="مبلغ التبرع" v={formatCurrency(amount)} />
+                    {supportPlatform && <Row k="دعم المنصة" v={formatCurrency(platformTip)} />}
                     <Row k="وسيلة الدفع" v={METHODS.find((m) => m.id === method)?.name || ""} />
-                    <Row k="الرسوم" v="0 $" highlight />
+                    <Row k="الرسوم" v="0 دج" highlight />
                     <div className="pt-2 border-t border-primary/15 flex justify-between font-bold text-lg">
                       <span>الإجمالي</span>
-                      <span className="text-primary">{formatCurrency(amount)}</span>
+                      <span className="text-primary">{formatCurrency(total)}</span>
                     </div>
                   </div>
 
@@ -184,7 +264,7 @@ function DonatePage() {
                   </motion.div>
                   <h2 className="font-display text-3xl font-extrabold">جزاك الله خيراً!</h2>
                   <p className="text-muted-foreground mt-3 max-w-md mx-auto">
-                    تم استلام تبرعك بقيمة <span className="font-bold text-primary">{formatCurrency(amount)}</span> لمشروع {project.title}.
+                    تم استلام تبرعك بقيمة <span className="font-bold text-primary">{formatCurrency(total)}</span> لمشروع {project.title}.
                     سنرسل إيصالك على بريدك، ونحدثك دورياً بأثر تبرعك.
                   </p>
                   <Badge className="bg-gold-gradient text-gold-foreground border-0 mt-5">

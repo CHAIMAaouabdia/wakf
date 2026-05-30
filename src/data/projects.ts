@@ -1,6 +1,7 @@
 export type Category =
   | "education"
   | "health"
+  | "medical"
   | "mosques"
   | "water"
   | "orphans"
@@ -10,6 +11,7 @@ export type Category =
 export const categories: { id: Category; label: string; icon: string }[] = [
   { id: "education", label: "التعليم", icon: "📚" },
   { id: "health", label: "الصحة", icon: "🏥" },
+  { id: "medical", label: "عمليات جراحية", icon: "🩺" },
   { id: "mosques", label: "المساجد", icon: "🕌" },
   { id: "water", label: "حفر الآبار", icon: "💧" },
   { id: "orphans", label: "الأيتام", icon: "🤲" },
@@ -17,10 +19,23 @@ export const categories: { id: Category; label: string; icon: string }[] = [
   { id: "solar", label: "الطاقة الشمسية", icon: "☀️" },
 ];
 
+// المنصة تغطي الجزائر وولاياتها فقط
+export const WILAYAS: string[] = [
+  "أدرار", "الشلف", "الأغواط", "أم البواقي", "باتنة", "بجاية", "بسكرة", "بشار",
+  "البليدة", "البويرة", "تمنراست", "تبسة", "تلمسان", "تيارت", "تيزي وزو",
+  "الجزائر", "الجلفة", "جيجل", "سطيف", "سعيدة", "سكيكدة", "سيدي بلعباس", "عنابة",
+  "قالمة", "قسنطينة", "المدية", "مستغانم", "المسيلة", "معسكر", "ورقلة", "وهران",
+  "البيض", "إليزي", "برج بوعريريج", "بومرداس", "الطارف", "تندوف", "تيسمسيلت",
+  "الوادي", "خنشلة", "سوق أهراس", "تيبازة", "ميلة", "عين الدفلى", "النعامة",
+  "عين تموشنت", "غرداية", "غليزان",
+];
+
 export interface Project {
   id: string;
   title: string;
   category: Category;
+  /** اسم الجمعية التي نشرت المشروع */
+  organization: string;
   shortDescription: string;
   story: string;
   image: string;
@@ -44,6 +59,7 @@ const img = (id: number, q: string) =>
 export const projects: Project[] = [
   {
     id: "wells-chad",
+    organization: "جمعية البر الخيرية",
     title: "حفر 50 بئراً في تشاد",
     category: "water",
     shortDescription: "توفير مياه نظيفة لأكثر من 25,000 نسمة في القرى الأفريقية النائية.",
@@ -82,6 +98,7 @@ export const projects: Project[] = [
   },
   {
     id: "school-yemen",
+    organization: "مؤسسة نماء للتنمية",
     title: "مدرسة وقفية في صنعاء",
     category: "education",
     shortDescription: "بناء وتشغيل مدرسة متكاملة لـ 800 طالب وطالبة من الأيتام والمحتاجين.",
@@ -119,6 +136,7 @@ export const projects: Project[] = [
   },
   {
     id: "mosque-bosnia",
+    organization: "جمعية إحياء التراث",
     title: "إعمار مسجد في البوسنة",
     category: "mosques",
     shortDescription: "ترميم وإعمار مسجد تاريخي يخدم 1,500 مصلٍّ مع مكتبة قرآنية.",
@@ -151,6 +169,7 @@ export const projects: Project[] = [
   },
   {
     id: "solar-gaza",
+    organization: "جمعية الإغاثة الطبية",
     title: "محطة طاقة شمسية لمستشفى",
     category: "solar",
     shortDescription: "تزويد مستشفى ميداني بالطاقة المتجددة لإنقاذ آلاف الأرواح.",
@@ -186,6 +205,7 @@ export const projects: Project[] = [
   },
   {
     id: "orphans-syria",
+    organization: "جمعية كافل لرعاية الأيتام",
     title: "كفالة 200 يتيم في الشام",
     category: "orphans",
     shortDescription: "كفالة شهرية شاملة (تعليم، صحة، سكن) لـ 200 يتيم سوري لمدة 5 سنوات.",
@@ -216,6 +236,7 @@ export const projects: Project[] = [
   },
   {
     id: "clinic-somalia",
+    organization: "جمعية الشفاء الإنسانية",
     title: "عيادة وقفية في الصومال",
     category: "health",
     shortDescription: "بناء عيادة متكاملة تخدم 50,000 نسمة بخدمات صحية مجانية.",
@@ -237,6 +258,44 @@ export const projects: Project[] = [
       { label: "مستفيد سنوياً", value: "50,000" },
       { label: "أقسام طبية", value: "6" },
       { label: "كوادر طبية", value: "35" },
+    ],
+  },
+  {
+    id: "surgery-amel",
+    organization: "جمعية أمل للرعاية الصحية",
+    title: "عملية جراحية مكلفة لزراعة القلب للطفلة أمل",
+    category: "medical",
+    shortDescription:
+      "تغطية تكاليف عملية جراحية دقيقة ومكلفة لزراعة صمام قلبي للطفلة أمل (6 سنوات) في الخارج.",
+    story:
+      "تعاني الطفلة أمل من عيب خلقي حاد في القلب يستوجب عملية جراحية عاجلة ومكلفة لزراعة صمام قلبي في مركز متخصص بالخارج. تشمل التكلفة العملية والإقامة والمتابعة الطبية لمدة ستة أشهر. كل تبرع يقرّبنا من إنقاذ حياتها بإذن الله.",
+    image: img(7, "photo-1581595219315-a187dd40c322"),
+    raised: 3_400_000,
+    goal: 9_500_000,
+    donors: 1872,
+    daysLeft: 18,
+    location: "وهران - الجزائر",
+    verified: true,
+    shariaCompliant: true,
+    transparencyScore: 97,
+    gallery: [
+      img(71, "photo-1581595219315-a187dd40c322"),
+      img(72, "photo-1551601651-2a8555f1a136"),
+      img(73, "photo-1538108149393-fbbd81895907"),
+    ],
+    timeline: [
+      { date: "ديسمبر 2025", title: "التشخيص الطبي", description: "تقارير من مستشفى وهران الجامعي", done: true },
+      { date: "يناير 2026", title: "قبول المركز الطبي", description: "تحديد موعد العملية بالخارج", done: true },
+      { date: "مارس 2026", title: "إجراء العملية", description: "زراعة الصمام القلبي", done: false },
+      { date: "سبتمبر 2026", title: "المتابعة والتعافي", description: "متابعة طبية لمدة 6 أشهر", done: false },
+    ],
+    updates: [
+      { date: "منذ 3 أيام", title: "اكتمال الفحوصات النهائية", content: "جاهزية الطفلة للعملية بعد استقرار حالتها." },
+    ],
+    impact: [
+      { label: "حياة تُنقذ", value: "1" },
+      { label: "نسبة نجاح العملية", value: "92%" },
+      { label: "أشهر متابعة", value: "6" },
     ],
   },
 ];

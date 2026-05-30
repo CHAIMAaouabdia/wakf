@@ -71,7 +71,7 @@ function Dashboard() {
       <section className="container mx-auto px-4 py-10 space-y-8">
         {/* KPI cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <KPI icon={Heart} label="إجمالي التبرعات" value={4280} prefix="$ " color="primary" />
+          <KPI icon={Heart} label="إجمالي التبرعات" value={4280} prefix="دج " color="primary" />
           <KPI icon={TrendingUp} label="مشاريع مدعومة" value={12} color="gold" />
           <KPI icon={Award} label="شارة الإنجاز" value={5} color="primary" />
           <KPI icon={Activity} label="مستفيدون من تبرعك" value={2840} suffix="+" color="navy" />
