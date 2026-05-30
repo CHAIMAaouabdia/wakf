@@ -48,9 +48,16 @@ function OrganizationPage() {
 function OrganizationDashboard() {
   const { user } = useAuth();
   // mock: this org owns the first 3 projects
-  const [myProjects, setMyProjects] = useState(projects.slice(0, 3));
+  const [myProjects] = useState(projects.slice(0, 3));
   const [open, setOpen] = useState(false);
-  const [draft, setDraft] = useState({ title: "", category: "water", goal: "", description: "" });
+  const [draft, setDraft] = useState({ title: "", category: "water", goal: "", description: "", wilaya: WILAYAS[15] });
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
+
+  useEffect(() => {
+    const load = () => setSubmissions(getSubmissionsByOrg(user?.name ?? ""));
+    load();
+    return subscribeSubmissions(load);
+  }, [user?.name]);
 
   const totalRaised = myProjects.reduce((s, p) => s + p.raised, 0);
   const totalDonors = myProjects.reduce((s, p) => s + p.donors, 0);
@@ -60,19 +67,15 @@ function OrganizationDashboard() {
       toast.error("يرجى تعبئة العنوان والمبلغ المستهدف");
       return;
     }
-    const newProject = {
-      ...projects[0],
-      id: `org-proj-${Date.now()}`,
+    addSubmission({
       title: draft.title,
       category: draft.category as (typeof projects)[number]["category"],
-      shortDescription: draft.description || "مشروع وقفي جديد",
       goal: Number(draft.goal),
-      raised: 0,
-      donors: 0,
-      verified: false,
-    };
-    setMyProjects((p) => [newProject, ...p]);
-    setDraft({ title: "", category: "water", goal: "", description: "" });
+      shortDescription: draft.description || "مشروع وقفي جديد",
+      organization: user?.name ?? "جمعية",
+      wilaya: draft.wilaya,
+    });
+    setDraft({ title: "", category: "water", goal: "", description: "", wilaya: WILAYAS[15] });
     setOpen(false);
     toast.success("تم إرسال المشروع للمراجعة من قبل الإدارة ✅");
   };
