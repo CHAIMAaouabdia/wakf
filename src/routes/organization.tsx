@@ -290,10 +290,20 @@ function CreateProjectDialog({ open, setOpen, draft, setDraft, onCreate }: any) 
               </select>
             </div>
             <div>
-              <Label htmlFor="g">المبلغ المستهدف ($)</Label>
+              <Label htmlFor="g">المبلغ المستهدف (دج)</Label>
               <Input id="g" type="number" value={draft.goal} className="mt-1"
                 onChange={(e) => setDraft({ ...draft, goal: e.target.value })} />
             </div>
+          </div>
+          <div>
+            <Label htmlFor="w">الولاية (الجزائر)</Label>
+            <select id="w" value={draft.wilaya}
+              onChange={(e) => setDraft({ ...draft, wilaya: e.target.value })}
+              className="mt-1 w-full h-10 rounded-md border bg-background px-3 text-sm">
+              {WILAYAS.map((w) => (
+                <option key={w} value={w}>{w}</option>
+              ))}
+            </select>
           </div>
           <div>
             <Label htmlFor="d">وصف مختصر</Label>
