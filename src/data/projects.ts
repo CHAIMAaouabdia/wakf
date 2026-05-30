@@ -260,6 +260,44 @@ export const projects: Project[] = [
       { label: "كوادر طبية", value: "35" },
     ],
   },
+  {
+    id: "surgery-amel",
+    organization: "جمعية أمل للرعاية الصحية",
+    title: "عملية جراحية مكلفة لزراعة القلب للطفلة أمل",
+    category: "medical",
+    shortDescription:
+      "تغطية تكاليف عملية جراحية دقيقة ومكلفة لزراعة صمام قلبي للطفلة أمل (6 سنوات) في الخارج.",
+    story:
+      "تعاني الطفلة أمل من عيب خلقي حاد في القلب يستوجب عملية جراحية عاجلة ومكلفة لزراعة صمام قلبي في مركز متخصص بالخارج. تشمل التكلفة العملية والإقامة والمتابعة الطبية لمدة ستة أشهر. كل تبرع يقرّبنا من إنقاذ حياتها بإذن الله.",
+    image: img(7, "photo-1581595219315-a187dd40c322"),
+    raised: 3_400_000,
+    goal: 9_500_000,
+    donors: 1872,
+    daysLeft: 18,
+    location: "وهران - الجزائر",
+    verified: true,
+    shariaCompliant: true,
+    transparencyScore: 97,
+    gallery: [
+      img(71, "photo-1581595219315-a187dd40c322"),
+      img(72, "photo-1551601651-2a8555f1a136"),
+      img(73, "photo-1538108149393-fbbd81895907"),
+    ],
+    timeline: [
+      { date: "ديسمبر 2025", title: "التشخيص الطبي", description: "تقارير من مستشفى وهران الجامعي", done: true },
+      { date: "يناير 2026", title: "قبول المركز الطبي", description: "تحديد موعد العملية بالخارج", done: true },
+      { date: "مارس 2026", title: "إجراء العملية", description: "زراعة الصمام القلبي", done: false },
+      { date: "سبتمبر 2026", title: "المتابعة والتعافي", description: "متابعة طبية لمدة 6 أشهر", done: false },
+    ],
+    updates: [
+      { date: "منذ 3 أيام", title: "اكتمال الفحوصات النهائية", content: "جاهزية الطفلة للعملية بعد استقرار حالتها." },
+    ],
+    impact: [
+      { label: "حياة تُنقذ", value: "1" },
+      { label: "نسبة نجاح العملية", value: "92%" },
+      { label: "أشهر متابعة", value: "6" },
+    ],
+  },
 ];
 
 export const getProject = (id: string) => projects.find((p) => p.id === id);
