@@ -212,6 +212,19 @@ function DonatePage() {
                   <div className="space-y-3">
                     <Input placeholder="الاسم الكريم" value={name} onChange={(e) => setName(e.target.value)} className="h-12" />
                     <Input type="email" placeholder="البريد الإلكتروني (لإرسال إيصال التبرع)" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12" />
+                    <Input type="tel" placeholder="رقم الهاتف (الجزائر)" value={phone} onChange={(e) => setPhone(e.target.value)} className="h-12" />
+                    <div>
+                      <label className="text-sm text-muted-foreground mb-1 block">الولاية (المنصة تغطي الجزائر وولاياتها فقط)</label>
+                      <select
+                        value={wilaya}
+                        onChange={(e) => setWilaya(e.target.value)}
+                        className="w-full h-12 rounded-md border bg-background px-3 text-sm"
+                      >
+                        {WILAYAS.map((w) => (
+                          <option key={w} value={w}>{w}</option>
+                        ))}
+                      </select>
+                    </div>
                     <label className="flex items-center gap-2 text-sm cursor-pointer">
                       <input type="checkbox" checked={anonymous} onChange={(e) => setAnonymous(e.target.checked)} className="size-4" />
                       التبرع باسم "متبرع كريم"
@@ -220,12 +233,15 @@ function DonatePage() {
 
                   <div className="bg-accent rounded-2xl p-5 space-y-2">
                     <Row k="المشروع" v={project.title} />
-                    <Row k="المبلغ" v={formatCurrency(amount)} />
+                    <Row k="الجمعية" v={project.organization} />
+                    <Row k="الولاية" v={wilaya} />
+                    <Row k="مبلغ التبرع" v={formatCurrency(amount)} />
+                    {supportPlatform && <Row k="دعم المنصة" v={formatCurrency(platformTip)} />}
                     <Row k="وسيلة الدفع" v={METHODS.find((m) => m.id === method)?.name || ""} />
-                    <Row k="الرسوم" v="0 $" highlight />
+                    <Row k="الرسوم" v="0 دج" highlight />
                     <div className="pt-2 border-t border-primary/15 flex justify-between font-bold text-lg">
                       <span>الإجمالي</span>
-                      <span className="text-primary">{formatCurrency(amount)}</span>
+                      <span className="text-primary">{formatCurrency(total)}</span>
                     </div>
                   </div>
 
