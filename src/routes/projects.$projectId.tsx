@@ -78,7 +78,8 @@ function ProjectDetail() {
                 </Badge>
               </div>
               <h1 className="font-display text-3xl md:text-4xl font-extrabold leading-tight">{project.title}</h1>
-              <div className="flex items-center gap-4 mt-3 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1 text-primary font-medium"><ShieldCheck className="size-4" /> {project.organization}</span>
                 <span className="flex items-center gap-1"><MapPin className="size-4" /> {project.location}</span>
                 <span className="flex items-center gap-1"><Clock className="size-4" /> {project.daysLeft} يوم متبقٍ</span>
               </div>
