@@ -138,6 +138,7 @@ function OrganizationDashboard() {
         <Tabs defaultValue="projects">
           <TabsList className="bg-card border h-12 p-1">
             <TabsTrigger value="projects">مشاريعي</TabsTrigger>
+            <TabsTrigger value="submissions">طلبات النشر</TabsTrigger>
             <TabsTrigger value="updates">نشر تحديث</TabsTrigger>
             <TabsTrigger value="profile">ملف الجمعية</TabsTrigger>
           </TabsList>
