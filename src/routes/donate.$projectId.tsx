@@ -31,11 +31,18 @@ function DonatePage() {
   const { project } = Route.useLoaderData() as { project: Project };
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(1000);
   const [method, setMethod] = useState("cib");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [wilaya, setWilaya] = useState(WILAYAS[15]);
   const [anonymous, setAnonymous] = useState(false);
+  const [supportPlatform, setSupportPlatform] = useState(false);
+  const [platformTip, setPlatformTip] = useState(200);
+  const [card, setCard] = useState({ number: "", exp: "", cvv: "" });
+
+  const total = amount + (supportPlatform ? platformTip : 0);
 
   const steps = ["المبلغ", "وسيلة الدفع", "التأكيد", "تم"];
 
