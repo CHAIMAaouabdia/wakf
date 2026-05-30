@@ -186,7 +186,51 @@ function OrganizationDashboard() {
             </div>
           </TabsContent>
 
+          <TabsContent value="submissions" className="mt-6">
+            {submissions.length === 0 ? (
+              <div className="bg-card border rounded-3xl p-12 text-center text-muted-foreground">
+                لا توجد طلبات نشر بعد. أنشئ مشروعاً جديداً ليظهر هنا بانتظار موافقة الإدارة.
+              </div>
+            ) : (
+              <div className="bg-card border rounded-3xl overflow-hidden">
+                <table className="w-full text-sm">
+                  <thead className="bg-muted/50 text-right">
+                    <tr>
+                      <th className="p-4 font-semibold">المشروع</th>
+                      <th className="p-4 font-semibold">التصنيف</th>
+                      <th className="p-4 font-semibold">الولاية</th>
+                      <th className="p-4 font-semibold">المبلغ المستهدف</th>
+                      <th className="p-4 font-semibold">الحالة</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {submissions.map((s) => (
+                      <tr key={s.id} className="border-t hover:bg-muted/30">
+                        <td className="p-4 font-medium">{s.title}</td>
+                        <td className="p-4 text-muted-foreground">
+                          {categories.find((c) => c.id === s.category)?.label ?? s.category}
+                        </td>
+                        <td className="p-4 text-muted-foreground">{s.wilaya}</td>
+                        <td className="p-4 text-primary font-bold">{formatCurrency(s.goal)}</td>
+                        <td className="p-4">
+                          {s.status === "approved" ? (
+                            <Badge className="bg-primary/15 text-primary border-0">منشور</Badge>
+                          ) : s.status === "rejected" ? (
+                            <Badge className="bg-destructive/15 text-destructive border-0">مرفوض</Badge>
+                          ) : (
+                            <Badge className="bg-gold/20 text-gold-foreground border-0">قيد المراجعة</Badge>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </TabsContent>
+
           <TabsContent value="updates" className="mt-6">
+
             <div className="bg-card border rounded-3xl p-6 max-w-2xl space-y-4">
               <h3 className="font-bold">نشر تحديث للمتبرعين</h3>
               <Input placeholder="عنوان التحديث" />
