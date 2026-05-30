@@ -105,7 +105,7 @@ function OrganizationDashboard() {
 
       <section className="container mx-auto px-4 py-10 space-y-8">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <OrgKPI icon={Wallet} label="إجمالي المُحصّل" value={totalRaised} prefix="$ " color="primary" />
+          <OrgKPI icon={Wallet} label="إجمالي المُحصّل" value={totalRaised} prefix="دج " color="primary" />
           <OrgKPI icon={FolderKanban} label="مشاريعي" value={myProjects.length} color="gold" />
           <OrgKPI icon={Users} label="إجمالي المتبرعين" value={totalDonors} color="navy" />
           <OrgKPI icon={TrendingUp} label="نمو هذا الشهر" value={31} suffix="%" color="primary" />

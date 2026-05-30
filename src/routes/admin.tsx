@@ -69,7 +69,7 @@ function Admin() {
       <section className="container mx-auto px-4 py-10 space-y-8">
         {/* KPIs */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <AdminKPI icon={DollarSign} label="إجمالي اليوم" value={42180} prefix="$ " trend="+18%" />
+          <AdminKPI icon={DollarSign} label="إجمالي اليوم" value={42180} prefix="دج " trend="+18%" />
           <AdminKPI icon={Heart} label="تبرعات نشطة" value={1284} trend="+24%" />
           <AdminKPI icon={Users} label="مستخدمون جدد" value={328} trend="+12%" />
           <AdminKPI icon={Folder} label="مشاريع قيد المراجعة" value={7} trend="3 جديدة" warn />
