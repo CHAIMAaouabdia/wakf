@@ -44,7 +44,7 @@ function ProjectsPage() {
             ابحث عن المشروع الذي يلامس قلبك.
           </h1>
           <p className="text-muted-foreground mt-3 max-w-2xl">
-            {projects.length} مشروعاً موثقاً شرعياً، في 7 تصنيفات، حول العالم.
+            {projects.length} مشروعاً موثقاً شرعياً، في 7 تصنيفات، في الجزائر.
           </p>
 
           <div className="mt-8 flex flex-col md:flex-row gap-3">
@@ -53,7 +53,7 @@ function ProjectsPage() {
               <Input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="ابحث عن مشروع، دولة، أو تصنيف..."
+                placeholder="ابحث عن مشروع، ولاية، أو تصنيف..."
                 className="h-12 pr-12 bg-card text-base"
               />
             </div>
