@@ -60,8 +60,8 @@ export function Header() {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="size-9 rounded-xl bg-primary-gradient grid place-items-center shadow-elegant group-hover:scale-105 transition-transform">
-            <Sparkles className="size-5 text-primary-foreground" />
+          <div className="size-9 rounded-xl bg-primary-gradient grid place-items-center shadow-elegant group-hover:scale-105 transition-transform overflow-hidden">
+            <img src={logoAsset.url} alt="منصة الوقف الرقمي" className="w-full h-full object-cover" />
           </div>
           <div className="leading-tight">
             <div className="font-display font-bold text-lg">منصة الوقف الرقمي</div>

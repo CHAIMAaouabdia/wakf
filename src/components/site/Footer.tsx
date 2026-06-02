@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Sparkles, Twitter, Facebook, Instagram, Linkedin, Mail } from "lucide-react";
+import { Twitter, Facebook, Instagram, Linkedin, Mail } from "lucide-react";
+import logoAsset from "@/assets/logo-hand.png.asset.json";
 
 export function Footer() {
   return (
