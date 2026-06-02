@@ -153,7 +153,7 @@ function Hero() {
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">جُمع اليوم</div>
-                  <div className="font-bold">$ 42,180</div>
+                  <div className="font-bold">42,180 دج</div>
                 </div>
               </div>
             </motion.div>
