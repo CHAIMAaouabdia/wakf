@@ -112,7 +112,7 @@ function About() {
       <section className="container mx-auto px-4 py-10">
         <div className="text-center mb-10">
           <Badge className="bg-accent text-accent-foreground border-0 mb-3">الشركاء</Badge>
-          <h2 className="font-display text-3xl font-extrabold">شراكات استراتيجية حول العالم</h2>
+          <h2 className="font-display text-3xl font-extrabold">شراكات استراتيجية في الجزائر</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {["IFAD", "IsDB", "UNHCR", "Awqaf SA", "LaunchGood"].map((p) => (
