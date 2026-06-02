@@ -24,7 +24,6 @@ const METHODS = [
   { id: "cib", name: "CIB", desc: "بطاقة الدفع الذهبية CIB", emoji: "🏦" },
   { id: "edahabia", name: "الذهبية", desc: "بطاقة بريد الجزائر الذهبية", emoji: "💳" },
   { id: "baridimob", name: "BaridiMob", desc: "الدفع عبر تطبيق بريدي موب", emoji: "📱" },
-  { id: "visa", name: "Visa / Mastercard", desc: "بطاقة دولية", emoji: "💠" },
 ];
 
 function DonatePage() {
