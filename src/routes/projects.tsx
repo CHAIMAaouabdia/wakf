@@ -53,7 +53,7 @@ function ProjectsPage() {
               <Input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="ابحث عن مشروع، دولة، أو تصنيف..."
+                placeholder="ابحث عن مشروع، ولاية، أو تصنيف..."
                 className="h-12 pr-12 bg-card text-base"
               />
             </div>
