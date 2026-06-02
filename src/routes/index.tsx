@@ -185,7 +185,7 @@ function StatsBand() {
     { icon: TrendingUp, label: "إجمالي التبرعات", value: stats.totalRaised, prefix: "$ " },
     { icon: Heart, label: "مشاريع ممولة", value: stats.projectsFunded },
     { icon: Users, label: "متبرع كريم", value: stats.donors, suffix: "+" },
-    { icon: Globe, label: "دولة مستفيدة", value: stats.countries },
+    { icon: Globe, label: "ولاية جزائرية", value: stats.wilayas },
   ];
   return (
     <section className="py-14 border-y bg-card">
