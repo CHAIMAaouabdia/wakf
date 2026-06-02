@@ -9,8 +9,8 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-4">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="size-9 rounded-xl bg-primary-gradient grid place-items-center shadow-elegant">
-                <Sparkles className="size-5 text-primary-foreground" />
+              <div className="size-9 rounded-xl bg-primary-gradient grid place-items-center shadow-elegant overflow-hidden">
+                <img src={logoAsset.url} alt="منصة الوقف الرقمي" className="w-full h-full object-cover" />
               </div>
               <div className="font-display font-bold">منصة الوقف الرقمي</div>
             </div>
