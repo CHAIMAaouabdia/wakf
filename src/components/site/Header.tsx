@@ -1,6 +1,6 @@
 import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, Moon, Sun, Sparkles, LogOut, LayoutDashboard } from "lucide-react";
+import { Menu, Moon, Sun, LogOut, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth, ROLE_LABELS, ROLE_HOME } from "@/lib/auth";
+import logoAsset from "@/assets/logo-hand.png.asset.json";
 
 const baseNav = [
   { to: "/", label: "الرئيسية" },
