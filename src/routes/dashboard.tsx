@@ -213,7 +213,7 @@ function Dashboard() {
           <TabsContent value="notifications" className="mt-6 space-y-3">
             {[
               { t: "تحديث جديد من مشروع البئر #22 تم اكتماله", d: "منذ ساعتين" },
-              { t: "وصل تبرعك للمستفيدين في تشاد ✅", d: "أمس" },
+              { t: "وصل تبرعك للمستفيدين في غرداية ✅", d: "أمس" },
               { t: "شارة جديدة: المتبرع الذهبي 🥇", d: "منذ 3 أيام" },
             ].map((n, i) => (
               <div key={i} className="bg-card border rounded-2xl p-4 flex items-start gap-3 hover:shadow-soft transition-all">
