@@ -43,10 +43,10 @@ const breakdown = [
 ];
 
 const history = [
-  { id: 1, project: "حفر 50 بئراً في تشاد", amount: 250, date: "12 مايو 2026", status: "مكتمل" },
-  { id: 2, project: "مدرسة وقفية في صنعاء", amount: 100, date: "3 مايو 2026", status: "مكتمل" },
-  { id: 3, project: "كفالة 200 يتيم في الشام", amount: 500, date: "21 أبريل 2026", status: "مكتمل" },
-  { id: 4, project: "محطة طاقة شمسية لمستشفى", amount: 250, date: "8 أبريل 2026", status: "مكتمل" },
+  { id: 1, project: "حفر 30 بئراً في غرداية", amount: 250, date: "12 مايو 2026", status: "مكتمل" },
+  { id: 2, project: "مدرسة وقفية في بسكرة", amount: 100, date: "3 مايو 2026", status: "مكتمل" },
+  { id: 3, project: "كفالة 100 يتيم في الأغواط", amount: 500, date: "21 أبريل 2026", status: "مكتمل" },
+  { id: 4, project: "محطة طاقة شمسية لمستشفى وهران", amount: 250, date: "8 أبريل 2026", status: "مكتمل" },
 ];
 
 function Dashboard() {
