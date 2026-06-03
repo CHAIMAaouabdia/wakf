@@ -8,6 +8,13 @@ import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { getProject, WILAYAS, type Project } from "@/data/projects";
 import { formatCurrency } from "@/lib/format";
+import { toast } from "sonner";
+import {
+  addDonation,
+  isValidCardNumber,
+  isValidExp,
+  isValidCvv,
+} from "@/lib/donations";
 
 export const Route = createFileRoute("/donate/$projectId")({
   loader: ({ params }) => {
@@ -40,10 +47,62 @@ function DonatePage() {
   const [supportPlatform, setSupportPlatform] = useState(false);
   const [platformTip, setPlatformTip] = useState(200);
   const [card, setCard] = useState({ number: "", exp: "", cvv: "" });
+  const [receiptId, setReceiptId] = useState("");
 
   const total = amount + (supportPlatform ? platformTip : 0);
 
   const steps = ["المبلغ", "وسيلة الدفع", "التأكيد", "تم"];
+
+  function handleNext() {
+    if (step === 0) {
+      if (amount <= 0) {
+        toast.error("الرجاء إدخال مبلغ تبرع صالح.");
+        return;
+      }
+    }
+    if (step === 1) {
+      if (!isValidCardNumber(card.number)) {
+        toast.error("رقم البطاقة غير صحيح.");
+        return;
+      }
+      if (!isValidExp(card.exp)) {
+        toast.error("تاريخ انتهاء البطاقة غير صحيح (MM / YY).");
+        return;
+      }
+      if (!isValidCvv(card.cvv)) {
+        toast.error("رمز CVV غير صحيح.");
+        return;
+      }
+    }
+    if (step === 2) {
+      if (!anonymous && name.trim().length < 2) {
+        toast.error("الرجاء إدخال الاسم الكريم.");
+        return;
+      }
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())) {
+        toast.error("البريد الإلكتروني غير صحيح.");
+        return;
+      }
+      const donation = addDonation({
+        projectId: project.id,
+        projectTitle: project.title,
+        organization: project.organization,
+        amount,
+        platformTip: supportPlatform ? platformTip : 0,
+        total,
+        method,
+        donorName: anonymous ? "متبرع كريم" : name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        wilaya,
+        anonymous,
+      });
+      setReceiptId(donation.id);
+      toast.success("تم استلام تبرعك بنجاح. جزاك الله خيراً!");
+    }
+    setStep((s) => s + 1);
+  }
+
 
   return (
     <SiteLayout>
@@ -267,8 +326,9 @@ function DonatePage() {
                     سنرسل إيصالك على بريدك، ونحدثك دورياً بأثر تبرعك.
                   </p>
                   <Badge className="bg-gold-gradient text-gold-foreground border-0 mt-5">
-                    <Sparkles className="size-3 ml-1" /> رقم العملية: WQF-2026-{Math.floor(Math.random() * 9000 + 1000)}
+                    <Sparkles className="size-3 ml-1" /> رقم العملية: {receiptId}
                   </Badge>
+
 
                   <div className="grid sm:grid-cols-2 gap-3 mt-8">
                     <Button variant="outline" className="gap-2"><Download className="size-4" /> تنزيل الإيصال</Button>
@@ -290,7 +350,7 @@ function DonatePage() {
                   السابق
                 </Button>
                 <Button
-                  onClick={() => setStep((s) => s + 1)}
+                  onClick={handleNext}
                   disabled={step === 0 && amount <= 0}
                   className="bg-primary-gradient text-primary-foreground gap-1"
                 >
