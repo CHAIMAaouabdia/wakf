@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ProjectCard } from "@/components/site/ProjectCard";
-import { categories, projects, type Category } from "@/data/projects";
+import { categories, publicProjects as projects, type Category } from "@/data/projects";
 
 export const Route = createFileRoute("/projects")({
   component: ProjectsPage,

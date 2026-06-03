@@ -298,9 +298,84 @@ export const projects: Project[] = [
       { label: "أشهر متابعة", value: "6" },
     ],
   },
+  {
+    id: "school-hamadia",
+    organization: "جمعية الحمادية للتنمية المحلية",
+    title: "مجمع تعليمي وقفي في الحمادية",
+    category: "education",
+    shortDescription:
+      "بناء مجمع تعليمي وقفي يضم مدرسة قرآنية وقاعات دراسية لخدمة 450 طالباً ببلدية الحمادية.",
+    story:
+      "تفتقر بلدية الحمادية إلى مرافق تعليمية كافية تستوعب الأعداد المتزايدة من الطلبة. يهدف المشروع إلى بناء مجمع تعليمي وقفي متكامل يضم مدرسة لتحفيظ القرآن الكريم وقاعات للدعم الدراسي ومكتبة عامة، يخدم أكثر من 450 طالباً وطالبة، ويُموَّل تشغيله من ريع محلات تجارية وقفية مرافقة لضمان استدامته.",
+    image: img(8, "photo-1503676260728-1c00da094a0b"),
+    raised: 540000,
+    goal: 1100000,
+    donors: 2150,
+    daysLeft: 38,
+    location: "الحمادية - الجزائر",
+    verified: true,
+    shariaCompliant: true,
+    transparencyScore: 91,
+    gallery: [
+      img(81, "photo-1503676260728-1c00da094a0b"),
+      img(82, "photo-1497486751825-1233686d5d80"),
+      img(83, "photo-1580582932707-520aed937b7b"),
+    ],
+    timeline: [
+      { date: "نوفمبر 2025", title: "تخصيص الأرض", description: "وقف من أهالي البلدية", done: true },
+      { date: "فبراير 2026", title: "بدء البناء", description: "الأساسات والهيكل", done: true },
+      { date: "يوليو 2026", title: "التجهيز", description: "أثاث ومكتبة", done: false },
+      { date: "سبتمبر 2026", title: "الافتتاح", description: "استقبال أول دفعة", done: false },
+    ],
+    updates: [
+      { date: "منذ 4 أيام", title: "اكتمال الهيكل الأساسي", content: "بدء أعمال التشطيب الداخلي." },
+    ],
+    impact: [
+      { label: "طالب مستفيد", value: "450" },
+      { label: "قاعات دراسية", value: "12" },
+      { label: "سنوات وقف", value: "دائم" },
+    ],
+  },
+  {
+    id: "platform-wakf",
+    organization: "منصة الوقف الرقمي",
+    title: "استثمر في منصة الوقف الرقمي",
+    category: "education",
+    shortDescription:
+      "تبرعك يُستثمر في تطوير المنصة، رفع الأمان والشفافية، وإيصال الوقف الرقمي لكل ولايات الجزائر.",
+    story:
+      "منصة الوقف الرقمي وقفٌ تقني بحد ذاته. مساهمتك هنا لا تذهب لمشروع بعينه، بل تُوجَّه لتطوير المنصة، تحسين تجربة المتبرعين، تعزيز أنظمة الأمان والشفافية، وتوسيع التغطية لتشمل كل ولايات الجزائر الـ48. هكذا نضمن استمرار خدمة 0% رسوم على مشاريع الجمعيات.",
+    image: img(9, "photo-1551288049-bebda4e38f71"),
+    raised: 1_250_000,
+    goal: 5_000_000,
+    donors: 3120,
+    daysLeft: 120,
+    location: "كل الجزائر",
+    verified: true,
+    shariaCompliant: true,
+    transparencyScore: 99,
+    gallery: [
+      img(91, "photo-1551288049-bebda4e38f71"),
+      img(92, "photo-1460925895917-afdab827c52f"),
+    ],
+    timeline: [
+      { date: "2025", title: "إطلاق المنصة", description: "النسخة الأولى", done: true },
+      { date: "2026", title: "تطوير ميزات جديدة", description: "تتبع أثر وتقارير", done: false },
+    ],
+    updates: [],
+    impact: [
+      { label: "مشاريع مدعومة", value: "184" },
+      { label: "ولاية مغطاة", value: "48" },
+      { label: "رسوم على المشاريع", value: "0%" },
+    ],
+  },
 ];
 
 export const getProject = (id: string) => projects.find((p) => p.id === id);
+
+/** المشاريع المعروضة في قوائم التصفّح (باستثناء وقف المنصة نفسه) */
+export const publicProjects = projects.filter((p) => p.id !== "platform-wakf");
+
 
 export const stats = {
   totalRaised: 12_840_000,

@@ -13,6 +13,7 @@ import {
   LineChart,
   Lock,
   Quote,
+  Rocket,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -25,7 +26,7 @@ import {
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ProjectCard } from "@/components/site/ProjectCard";
 import { Counter } from "@/components/site/Counter";
-import { projects, stats, testimonials, faqs, categories } from "@/data/projects";
+import { publicProjects, stats, testimonials, faqs, categories } from "@/data/projects";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -46,6 +47,8 @@ function Index() {
       <FeaturedProjects />
       <WhyUs />
       <Transparency />
+      <PlatformSupport />
+
       <Testimonials />
       <FAQ />
       <CTA />
@@ -82,6 +85,9 @@ function Hero() {
             أحيِ سنة الوقف
             <br />
             <span className="text-hero-gradient">في زمن رقمي.</span>
+            <span className="block mt-3 font-display text-xl md:text-2xl font-semibold text-muted-foreground tracking-normal">
+              حيث يلتقي طموح الإدارة بنبل العطاء..
+            </span>
           </motion.h1>
 
           <motion.p
@@ -254,7 +260,7 @@ function HowItWorks() {
 }
 
 function FeaturedProjects() {
-  const featured = projects.slice(0, 3);
+  const featured = publicProjects.slice(0, 3);
   return (
     <section className="py-24 bg-soft-gradient">
       <div className="container mx-auto px-4">
@@ -435,6 +441,81 @@ function FAQ() {
             </AccordionItem>
           ))}
         </Accordion>
+      </div>
+    </section>
+  );
+}
+
+function PlatformSupport() {
+  const tiers = [
+    { amount: 1000, label: "داعم", desc: "مساهمة في تشغيل المنصة" },
+    { amount: 5000, label: "شريك نماء", desc: "تطوير ميزات جديدة" },
+    { amount: 20000, label: "مستثمر أثر", desc: "توسيع المنصة وطنياً" },
+  ];
+  return (
+    <section className="py-24 bg-soft-gradient">
+      <div className="container mx-auto px-4">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-card border shadow-elegant p-10 md:p-14">
+          <div className="absolute -top-24 -left-24 size-72 rounded-full bg-gold/15 blur-3xl" />
+          <div className="absolute -bottom-24 -right-24 size-72 rounded-full bg-primary/15 blur-3xl" />
+          <div className="relative grid lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <Badge className="bg-accent text-accent-foreground border-0 mb-4">
+                <Rocket className="size-3.5 ml-1" /> استثمر في المنصة
+              </Badge>
+              <h2 className="font-display text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+                ادعم منصة الوقف الرقمي
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6 max-w-xl">
+                المنصة وقفٌ تقني بحد ذاته. تبرعك هنا لا يذهب لمشروع بعينه، بل يُستثمر في تطوير
+                المنصة، تحسين الأمان والشفافية، وإيصال الوقف الرقمي لكل ولايات الجزائر.
+              </p>
+              <div className="flex flex-wrap gap-4 mb-8">
+                {["تطوير مستمر", "أمان أعلى", "تغطية أوسع", "0% رسوم على المشاريع"].map((t) => (
+                  <div key={t} className="flex items-center gap-2 text-sm">
+                    <CheckCircle2 className="size-5 text-primary" /> {t}
+                  </div>
+                ))}
+              </div>
+              <Link to="/donate/$projectId" params={{ projectId: "platform-wakf" }}>
+                <Button size="lg" className="bg-primary-gradient text-primary-foreground shadow-elegant px-8 h-12">
+                  ساهم في تطوير المنصة
+                  <ArrowLeft className="size-4 mr-1" />
+                </Button>
+              </Link>
+            </div>
+            <div className="space-y-4">
+              {tiers.map((tier, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <Link
+                    to="/donate/$projectId"
+                    params={{ projectId: "platform-wakf" }}
+                    className="flex items-center justify-between gap-4 rounded-2xl border bg-background p-5 hover:border-primary/50 hover:shadow-soft transition-all group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="size-12 rounded-xl bg-gold-gradient text-gold-foreground grid place-items-center">
+                        <Heart className="size-6" />
+                      </div>
+                      <div>
+                        <div className="font-display font-bold text-lg">{tier.label}</div>
+                        <div className="text-sm text-muted-foreground">{tier.desc}</div>
+                      </div>
+                    </div>
+                    <div className="font-display font-extrabold text-hero-gradient text-xl whitespace-nowrap">
+                      {new Intl.NumberFormat("ar-EG").format(tier.amount)} دج
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
