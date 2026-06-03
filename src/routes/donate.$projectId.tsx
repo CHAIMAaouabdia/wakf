@@ -326,8 +326,9 @@ function DonatePage() {
                     سنرسل إيصالك على بريدك، ونحدثك دورياً بأثر تبرعك.
                   </p>
                   <Badge className="bg-gold-gradient text-gold-foreground border-0 mt-5">
-                    <Sparkles className="size-3 ml-1" /> رقم العملية: WQF-2026-{Math.floor(Math.random() * 9000 + 1000)}
+                    <Sparkles className="size-3 ml-1" /> رقم العملية: {receiptId}
                   </Badge>
+
 
                   <div className="grid sm:grid-cols-2 gap-3 mt-8">
                     <Button variant="outline" className="gap-2"><Download className="size-4" /> تنزيل الإيصال</Button>
