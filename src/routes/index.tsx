@@ -82,6 +82,9 @@ function Hero() {
             أحيِ سنة الوقف
             <br />
             <span className="text-hero-gradient">في زمن رقمي.</span>
+            <span className="block mt-3 font-display text-xl md:text-2xl font-semibold text-muted-foreground tracking-normal">
+              حيث يلتقي طموح الإدارة بنبل العطاء..
+            </span>
           </motion.h1>
 
           <motion.p
