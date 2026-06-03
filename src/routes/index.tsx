@@ -26,7 +26,7 @@ import {
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ProjectCard } from "@/components/site/ProjectCard";
 import { Counter } from "@/components/site/Counter";
-import { projects, stats, testimonials, faqs, categories } from "@/data/projects";
+import { publicProjects, stats, testimonials, faqs, categories } from "@/data/projects";
 
 export const Route = createFileRoute("/")({
   component: Index,
