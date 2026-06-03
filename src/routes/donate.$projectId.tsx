@@ -8,6 +8,13 @@ import { Badge } from "@/components/ui/badge";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { getProject, WILAYAS, type Project } from "@/data/projects";
 import { formatCurrency } from "@/lib/format";
+import { toast } from "sonner";
+import {
+  addDonation,
+  isValidCardNumber,
+  isValidExp,
+  isValidCvv,
+} from "@/lib/donations";
 
 export const Route = createFileRoute("/donate/$projectId")({
   loader: ({ params }) => {
