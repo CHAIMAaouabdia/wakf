@@ -76,7 +76,7 @@ function DonatePage() {
     }
     if (step === 2) {
       if (!anonymous && name.trim().length < 2) {
-        toast.error("الرجaء إدخال الاسم الكريم.");
+        toast.error("الرجاء إدخال الاسم الكريم.");
         return;
       }
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())) {
