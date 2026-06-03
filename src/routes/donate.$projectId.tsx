@@ -350,7 +350,7 @@ function DonatePage() {
                   السابق
                 </Button>
                 <Button
-                  onClick={() => setStep((s) => s + 1)}
+                  onClick={handleNext}
                   disabled={step === 0 && amount <= 0}
                   className="bg-primary-gradient text-primary-foreground gap-1"
                 >
