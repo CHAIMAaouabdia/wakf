@@ -260,7 +260,7 @@ function HowItWorks() {
 }
 
 function FeaturedProjects() {
-  const featured = projects.slice(0, 3);
+  const featured = publicProjects.slice(0, 3);
   return (
     <section className="py-24 bg-soft-gradient">
       <div className="container mx-auto px-4">
