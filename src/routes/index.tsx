@@ -46,6 +46,8 @@ function Index() {
       <FeaturedProjects />
       <WhyUs />
       <Transparency />
+      <PlatformSupport />
+
       <Testimonials />
       <FAQ />
       <CTA />
