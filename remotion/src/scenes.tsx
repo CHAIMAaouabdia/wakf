@@ -222,8 +222,27 @@ export const QATransparency: React.FC = () => (
 );
 
 /* 6. FEATURES */
-const FeatCard: React.FC<{ icon: string; title: string; desc: string; delay: number }> = ({
-  icon,
+const Badge: React.FC<{ glyph: string; size?: number }> = ({ glyph, size = 64 }) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      borderRadius: size / 3,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: size * 0.5,
+      fontWeight: 900,
+      color: COLORS.navyDeep,
+      background: `linear-gradient(135deg, ${COLORS.emeraldGlow}, ${COLORS.gold})`,
+    }}
+  >
+    {glyph}
+  </div>
+);
+
+const FeatCard: React.FC<{ glyph: string; title: string; desc: string; delay: number }> = ({
+  glyph,
   title,
   desc,
   delay,
@@ -239,7 +258,9 @@ const FeatCard: React.FC<{ icon: string; title: string; desc: string; delay: num
         border: "1px solid rgba(255,255,255,0.10)",
       }}
     >
-      <div style={{ fontSize: 44, marginBottom: 14 }}>{icon}</div>
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+        <Badge glyph={glyph} />
+      </div>
       <div style={{ fontSize: 32, fontWeight: 700, color: COLORS.white, marginBottom: 8 }}>
         {title}
       </div>
@@ -259,13 +280,13 @@ export const FeaturesScene: React.FC = () => (
         <div style={{ ...big(60), color: COLORS.white }}>كل ما تحتاجه للعطاء.. في مكان واحد</div>
       </Reveal>
       <div style={{ display: "flex", gap: 26, marginTop: 46 }}>
-        <FeatCard icon="🕌" title="مشاريع وقفية" desc="استكشف وادعم مشاريع خيرية موثّقة" delay={30} />
-        <FeatCard icon="🤝" title="تمويل جماعي" desc="تكاتفٌ جماعي لتحقيق الأثر الأكبر" delay={42} />
-        <FeatCard icon="🛡️" title="امتثال شرعي" desc="ضوابط شرعية في كل مرحلة" delay={54} />
+        <FeatCard glyph="◆" title="مشاريع وقفية" desc="استكشف وادعم مشاريع خيرية موثّقة" delay={30} />
+        <FeatCard glyph="✦" title="تمويل جماعي" desc="تكاتفٌ جماعي لتحقيق الأثر الأكبر" delay={42} />
+        <FeatCard glyph="●" title="امتثال شرعي" desc="ضوابط شرعية في كل مرحلة" delay={54} />
       </div>
       <div style={{ display: "flex", gap: 26, marginTop: 26 }}>
-        <FeatCard icon="📊" title="تقارير حيّة" desc="متابعة دقيقة لكل تبرّع ومشروع" delay={62} />
-        <FeatCard icon="🔔" title="إشعارات فورية" desc="تنبيهات لكل تحديث في رحلتك" delay={72} />
+        <FeatCard glyph="◈" title="تقارير حيّة" desc="متابعة دقيقة لكل تبرّع ومشروع" delay={62} />
+        <FeatCard glyph="▲" title="إشعارات فورية" desc="تنبيهات لكل تحديث في رحلتك" delay={72} />
       </div>
     </Scene>
   </AbsoluteFill>
