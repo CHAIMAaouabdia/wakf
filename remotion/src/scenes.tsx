@@ -301,7 +301,7 @@ export const WilayasPayments: React.FC = () => {
       <Bg variant="pattern" />
       <Scene>
         <Reveal delay={2}>
-          <Chip color={COLORS.gold}>صُنع في الجزائر 🇩🇿</Chip>
+          <Chip color={COLORS.gold}>صُنع في الجزائر</Chip>
         </Reveal>
         <Reveal delay={14} style={{ marginTop: 30 }}>
           <div style={{ ...big(150), color: COLORS.goldSoft }}>{count}</div>
@@ -423,14 +423,16 @@ export const UXScene: React.FC = () => (
       </Reveal>
       <div style={{ display: "flex", gap: 56, marginTop: 56 }}>
         {[
-          { k: "📱", v: "متجاوب كليًّا" },
-          { k: "✨", v: "تصميم عصري" },
-          { k: "⚡", v: "سرعة وأمان" },
-          { k: "🌙", v: "وضع ليلي" },
+          { k: "◆", v: "متجاوب كليًّا" },
+          { k: "✦", v: "تصميم عصري" },
+          { k: "▲", v: "سرعة وأمان" },
+          { k: "●", v: "وضع ليلي" },
         ].map((it, i) => (
           <Reveal key={it.v} delay={34 + i * 10}>
             <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 64, marginBottom: 12 }}>{it.k}</div>
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>
+                <Badge glyph={it.k} size={80} />
+              </div>
               <div style={{ fontSize: 30, color: COLORS.goldSoft, fontWeight: 700 }}>{it.v}</div>
             </div>
           </Reveal>
