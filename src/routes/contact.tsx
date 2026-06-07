@@ -62,9 +62,9 @@ function Contact() {
 
         <div className="lg:col-span-2 space-y-4">
           {[
-            { icon: Mail, t: "البريد الإلكتروني", d: "hello@waqf-platform.io" },
-            { icon: Phone, t: "الهاتف", d: "966 + 11 000 0000" },
-            { icon: MapPin, t: "العنوان", d: "الرياض، المملكة العربية السعودية" },
+            { icon: Mail, t: "البريد الإلكتروني", d: "waqf.platform@gmail.com" },
+            { icon: Phone, t: "الهاتف", d: "0554552643" },
+            { icon: MapPin, t: "العنوان", d: "الجزائر، برج بوعريريج" },
             { icon: MessageCircle, t: "دعم مباشر", d: "متاح 24/7 على الواتساب" },
           ].map((c, i) => (
             <div key={i} className="bg-card border rounded-2xl p-5 flex items-center gap-4 hover:shadow-soft transition-all">
@@ -94,7 +94,7 @@ function Contact() {
             <div className="absolute inset-0 grid place-items-center">
               <div className="text-center">
                 <MapPin className="size-8 text-primary mx-auto mb-2" />
-                <div className="text-sm text-muted-foreground">الرياض، المملكة العربية السعودية</div>
+                <div className="text-sm text-muted-foreground">الجزائر، برج بوعريريج</div>
               </div>
             </div>
           </div>

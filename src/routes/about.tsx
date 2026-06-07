@@ -32,11 +32,12 @@ function About() {
       </section>
 
       <section className="container mx-auto px-4 py-20">
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { icon: Eye, t: "رؤيتنا", d: "أن نكون المنصة الأولى عالمياً للوقف الإسلامي الرقمي بحلول 2030." },
             { icon: Target, t: "رسالتنا", d: "تمكين كل مسلم من إنشاء وقف رقمي شفاف، آمن، ومتوافق مع الشريعة." },
             { icon: Heart, t: "قيمنا", d: "الشفافية، الأمانة، الإتقان، والامتثال الشرعي قبل كل شيء." },
+            { icon: Award, t: "تاريخ التأسيس", d: "2026 — انطلقنا بشغف لخدمة الأمة وإحياء سنة الوقف." },
           ].map((v, i) => (
             <motion.div
               key={i}
@@ -84,12 +85,13 @@ function About() {
           <Badge className="bg-accent text-accent-foreground border-0 mb-3">الفريق</Badge>
           <h2 className="font-display text-4xl font-extrabold">عقول تجمع بين الفقه والتكنولوجيا</h2>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
           {[
-            { n: "د. عبدالرحمن الفهد", r: "رئيس الهيئة الشرعية", a: "AF" },
-            { n: "م. سارة العتيبي", r: "الرئيس التنفيذي", a: "SO" },
-            { n: "م. يوسف القحطاني", r: "رئيس التقنية", a: "YQ" },
-            { n: "ليلى المنصور", r: "رئيس الشراكات", a: "LM" },
+            { n: "أستاذ دكتور متخصص في الفقه الإسلامي والمالية الإسلامية", r: "رئيس الهيئة الشرعية", a: "أ.د" },
+            { n: "طرش رحمة شندار رميسة", r: "الرئيس التنفيذي", a: "ط.ش.ر" },
+            { n: "طرش رحمة", r: "رئيس التقنية", a: "ط.ر" },
+            { n: "شندار رميسة", r: "رئيس التسويق", a: "ش.ر" },
+            { n: "ساري سهام", r: "مستشار أكاديمي", a: "س.س" },
           ].map((p, i) => (
             <motion.div
               key={i}
