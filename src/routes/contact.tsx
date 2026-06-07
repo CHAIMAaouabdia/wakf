@@ -94,7 +94,7 @@ function Contact() {
             <div className="absolute inset-0 grid place-items-center">
               <div className="text-center">
                 <MapPin className="size-8 text-primary mx-auto mb-2" />
-                <div className="text-sm text-muted-foreground">الرياض، المملكة العربية السعودية</div>
+                <div className="text-sm text-muted-foreground">الجزائر، برج بوعريريج</div>
               </div>
             </div>
           </div>
