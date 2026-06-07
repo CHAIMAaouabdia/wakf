@@ -85,7 +85,7 @@ function About() {
           <Badge className="bg-accent text-accent-foreground border-0 mb-3">الفريق</Badge>
           <h2 className="font-display text-4xl font-extrabold">عقول تجمع بين الفقه والتكنولوجيا</h2>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
           {[
             { n: "أستاذ دكتور متخصص في الفقه الإسلامي والمالية الإسلامية", r: "رئيس الهيئة الشرعية", a: "أ.د" },
             { n: "طرش رحمة شندار رميسة", r: "الرئيس التنفيذي", a: "ط.ش.ر" },
