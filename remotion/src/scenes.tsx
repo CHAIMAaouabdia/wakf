@@ -295,7 +295,7 @@ export const FeaturesScene: React.FC = () => (
 /* 7. WILAYAS & PAYMENTS */
 export const WilayasPayments: React.FC = () => {
   const frame = useCurrentFrame();
-  const count = Math.round(interpolate(frame, [20, 70], [0, 48], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
+  const count = Math.round(interpolate(frame, [20, 70], [0, 69], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
   return (
     <AbsoluteFill>
       <Bg variant="pattern" />
